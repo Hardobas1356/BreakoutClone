@@ -6,6 +6,7 @@ public class Ball : MonoBehaviour
 {
     public static Ball Instance;
 
+    [SerializeField] private ResetTrigger resetTrigger;
     private Rigidbody2D rb;
     private Vector2 initialPosition = new Vector2(0f,-1f);
     private float speed = 400f;
@@ -18,7 +19,14 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(LaunchBall),1);
+        resetTrigger.OnObjectEnter += BallReachResetTrigger;
     }
+
+    private void BallReachResetTrigger(object sender, System.EventArgs e)
+    {
+        ResetBall();
+    }
+
     private void LaunchBall()
     {
         Vector2 force = Vector2.zero;
