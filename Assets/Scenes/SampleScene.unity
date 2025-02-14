@@ -4185,7 +4185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bf367bfbf9ab57468aac0eeca1332a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetTrigger: {fileID: 933428952}
 --- !u!50 &1091202485
 Rigidbody2D:
   serializedVersion: 4
@@ -6391,6 +6390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1604447343}
+  - component: {fileID: 1604447344}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6413,6 +6413,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1506233486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1604447344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604447342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd33b5d7b09c1648b8847685a07c1cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1632799797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6977,6 +6989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1748591278}
+  - component: {fileID: 1748591279}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -7004,6 +7017,19 @@ RectTransform:
   m_AnchoredPosition: {x: 32, y: -30}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1748591279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1748591277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1230f80af98b640b91bf472a750242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthText: {fileID: 1096100587}
 --- !u!1001 &1756754762
 PrefabInstance:
   m_ObjectHideFlags: 0

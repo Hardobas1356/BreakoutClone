@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance;
+    public EventHandler PauseButtonPressed;
 
     private Actions inputActions;
 
@@ -13,11 +15,18 @@ public class InputManager : MonoBehaviour
         Instance = this;
         inputActions = new Actions();
         inputActions.Enable();
+
+        inputActions.Player.Pause.performed += Pause_performed;
+    }
+
+    private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        PauseButtonPressed?.Invoke(this, EventArgs.Empty);
     }
 
     private void OnDestroy()
     {
-        inputActions.Disable(); 
+        inputActions.Dispose(); 
     }
 
     public Vector2 getMovementVectorNormalized()
@@ -27,10 +36,5 @@ public class InputManager : MonoBehaviour
         inputVector = inputActions.Player.Move.ReadValue<Vector2>();
 
         return inputVector.normalized;
-    }
-
-    private void Pause()
-    {
-        
     }
 }

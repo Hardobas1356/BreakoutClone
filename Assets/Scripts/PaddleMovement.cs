@@ -28,7 +28,6 @@ public class PaddleMovement : MonoBehaviour
         }
         else
         {
-            Debug.Log(hit.collider.name);
         }
     }
 }

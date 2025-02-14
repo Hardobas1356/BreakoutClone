@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public static Ball Instance;
+    public EventHandler OnBallResetTrigger;
 
-    [SerializeField] private ResetTrigger resetTrigger;
     private Rigidbody2D rb;
     private Vector2 initialPosition = new Vector2(0f,-1f);
     private float speed = 400f;
@@ -19,18 +20,18 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(LaunchBall),1);
-        resetTrigger.OnObjectEnter += BallReachResetTrigger;
     }
 
-    private void BallReachResetTrigger(object sender, System.EventArgs e)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        OnBallResetTrigger?.Invoke(this,EventArgs.Empty);
         ResetBall();
     }
 
     private void LaunchBall()
     {
         Vector2 force = Vector2.zero;
-        force.x = Random.Range(-1f,1f);
+        force.x = UnityEngine.Random.Range(-1f,1f);
         force.y = -1f;
 
         rb.AddForce(force.normalized*speed);
