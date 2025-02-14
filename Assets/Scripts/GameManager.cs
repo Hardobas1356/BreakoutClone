@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int Life { get; private set; } = 3;
     public EventHandler LifeLowered;
+    public EventHandler OnStateChanged;
     public enum State
     {
         GameWaitingToStart,
@@ -17,7 +20,12 @@ public class GameManager : MonoBehaviour
 
     private bool isGamePaused = false;
     private State state;
-    private float countdownToStart=3f;
+    private float countdownToStart = 3f;
+
+    public bool IsGameOver()
+    {
+        return state == State.GameOver;
+    }
     private void Awake()
     {
         Instance = this;
@@ -43,14 +51,18 @@ public class GameManager : MonoBehaviour
 
                 if (countdownToStart <= 0)
                     state = State.GamePlaying;
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
                 break;
             case State.GamePlaying:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
+
                 if (Life <= 0)
                 {
                     state = State.GameOver;
                 }
                 break;
             case State.GameOver:
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
                 break;
             default:
                 break;
@@ -59,11 +71,11 @@ public class GameManager : MonoBehaviour
     private void BallWasReset(object sender, EventArgs e)
     {
         Life--;
-        LifeLowered?.Invoke(this, null);    
+        LifeLowered?.Invoke(this, null);
 
         if (Life == 0)
         {
-            state=State.GameOver;
+            state = State.GameOver;
         }
     }
 
@@ -79,7 +91,5 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
         }
     }
-
-
 
 }
